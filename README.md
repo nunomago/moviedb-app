@@ -1,6 +1,6 @@
 # MovieDB App
 
-This is a client app for [The Movie DB API](https://developer.themoviedb.org/reference/search-movie), built in NextJS with Typescript and Tailwind.
+This is a client app for [The Movie DB API](https://developer.themoviedb.org/reference/search-movie), built with NextJS, Typescript and Tailwind.
 
 ## Getting Started
 
