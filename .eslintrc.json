@@ -1,7 +1,18 @@
 {
-  "extends": ["airbnb", "airbnb-typescript", "next", "next/core-web-vitals"],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "next",
+    "next/core-web-vitals"
+  ],
+  "ignorePatterns": [
+    "**/*.js",
+    "**/*.jsx"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "ignorePatterns": ["**/*.js", "**/*.jsx"]
+  "rules": {
+    "react/require-default-props": 0
+  }
 }
