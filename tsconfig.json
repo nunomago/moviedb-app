@@ -21,8 +21,17 @@
       "@components/*": [
         "./src/components/*"
       ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@interfaces/*": [
+        "./src/interfaces/*"
+      ],
       "@pages/*": [
         "./src/pages/*"
+      ],
+      "@queries/*": [
+        "./src/queries/*"
       ],
       "@styles/*": [
         "./src/styles/*"

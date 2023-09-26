@@ -4,10 +4,15 @@ import ThemeSwitcher from '@components/molecules/ThemeSwitcher';
 import { Inter } from 'next/font/google';
 import { useEffect, useState } from 'react';
 import { MoonIcon, SunIcon } from '@heroicons/react/20/solid';
+import useDebounced from '@hooks/useDebounced';
+import { useSearch } from '@queries/search';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const debouncedSearchQuery = useDebounced(searchQuery, 300);
+  const { data: searchResults, isLoading: isSearchQueryLoading } = useSearch(debouncedSearchQuery);
   const [ThemeSwitchTopButtonIcon, setThemeSwitchTopButtonIcon] = useState<typeof MoonIcon>();
   function setDarkTheme() {
     document.documentElement.classList.add('dark');
@@ -39,12 +44,6 @@ export default function Home() {
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const onSearchButtonClick = () => {
     setIsSearchModalOpen(((prevState) => !prevState));
-    // TODO: REMOVE THIS
-    fetch('https://api.themoviedb.org/3/search/movie?query=blade&api_key=27cfec6c9eb8080cb7d8025ba420e2d7')
-      .then((response) => response.json())
-      .then((response) => {
-        console.log('response', response);
-      });
   };
   const searchModalKeyboardShortcutToggle = () => {
     const onKeydown = (e: KeyboardEvent) => {
@@ -77,7 +76,14 @@ export default function Home() {
         className={`relative mx-auto container flex justify-center items-center
           ${inter.className}`}
       >
-        <SearchModal isOpen={isSearchModalOpen} setIsOpen={setIsSearchModalOpen} />
+        <SearchModal
+          isOpen={isSearchModalOpen}
+          isSearchQueryLoading={isSearchQueryLoading}
+          query={debouncedSearchQuery}
+          searchResults={searchResults}
+          setIsOpen={setIsSearchModalOpen}
+          setQuery={setSearchQuery}
+        />
       </main>
     </>
   );
