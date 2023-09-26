@@ -8,6 +8,9 @@ const nextConfig = {
         hostname: 'image.tmdb.org',
       },
     ],
+  },
+  publicRuntimeConfig: {
+    apiKey: process.env.API_KEY
   }
 }
 

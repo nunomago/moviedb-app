@@ -2,10 +2,10 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import { Combobox } from '@headlessui/react';
 import Image from 'next/image';
 import { classNames } from '@utils/helpers';
-import { Movie } from '@interfaces/MovieSearch';
+import { SearchResult } from '@interfaces/MovieSearch';
 
 type Props = {
-  movie: Movie
+  movie: SearchResult
 };
 
 export default function SearchModalResult({ movie }: Props) {
@@ -16,7 +16,7 @@ export default function SearchModalResult({ movie }: Props) {
       value={movie}
       className={({ active }) => classNames(
         'flex cursor-default select-none items-center rounded-md p-2',
-        active && 'bg-slate-100 text-slate-900 dark:text-slate-700',
+        active && 'bg-slate-100 text-light-secondary dark:text-slate-700',
       )}
     >
       {({ active }) => (

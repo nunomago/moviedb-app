@@ -1,11 +1,11 @@
 export interface SearchPage {
   page: number
-  results: Movie[]
+  results: SearchResult[]
   total_pages: number
   total_results: number
 }
 
-export interface Movie {
+export interface SearchResult {
   adult: boolean
   backdrop_path: string
   genre_ids: number[]

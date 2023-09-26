@@ -15,7 +15,7 @@ export default function SearchModalInput({ onChange }: Props) {
         aria-hidden="true"
       />
       <Combobox.Input
-        className={`h-14 flex-1 border-0 bg-transparent pl-0 pr-4 text-gray-900
+        className={`h-14 flex-1 border-0 bg-transparent pl-0 pr-4 text-light-secondary
           dark:text-slate-50 placeholder:text-gray-400 dark:placeholder:text-slate-300
           focus:ring-0 sm:text-sm`}
         placeholder="Search..."

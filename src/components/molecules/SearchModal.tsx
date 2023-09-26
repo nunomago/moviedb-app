@@ -8,8 +8,9 @@ import SearchModalNoResultsMessage from '@components/atoms/SearchModal/NoResults
 import SearchModalResultPreview from '@components/atoms/SearchModal/ResultPreview';
 import { classNames } from '@utils/helpers';
 import SearchModalResult from '@components/atoms/SearchModal/Result';
-import { Movie, SearchPage } from '@interfaces/MovieSearch';
+import { SearchResult, SearchPage } from '@interfaces/MovieSearch';
 import SearchModalLoadingMessage from '@components/atoms/SearchModal/LoadingMessage';
+import { useRouter } from 'next/router';
 
 type Props = {
   isOpen: boolean
@@ -28,8 +29,13 @@ export default function SearchModal({
   setIsOpen,
   setQuery,
 }: Props) {
+  const { push } = useRouter();
   const hasSearchResults = query !== '' && !!searchResults?.results.length;
   const hasNoSearchResults = query !== '' && !isSearchQueryLoading && !searchResults?.results.length;
+  const onMoreDetailsClick = (movie: SearchResult) => () => {
+    push(`/movie/${movie.id.toString()}`);
+    setIsOpen(false);
+  };
   return (
     <Transition.Root show={isOpen} as={Fragment} afterLeave={() => setQuery('')} appear>
       <Dialog as="div" className="relative z-10" onClose={setIsOpen}>
@@ -60,8 +66,9 @@ export default function SearchModal({
                 ring-opacity-5 transition-all`}
             >
               <Combobox
-                onChange={(movie: Movie) => {
-                  window.location.href = movie.id.toString();
+                onChange={(movie: SearchResult) => {
+                  push(`/movie/${movie.id.toString()}`);
+                  setIsOpen(false);
                 }}
               >
                 {({ activeOption }) => (
@@ -87,14 +94,19 @@ export default function SearchModal({
                             'min-w-0 flex-auto scroll-py-4 overflow-y-auto px-6 py-4',
                           )}
                         >
-                          <div className="-mx-2 text-sm text-gray-700">
+                          <div className="-mx-2 text-sm text-gray-700 dark:text-slate-50">
                             {searchResults.results.map((movie) => (
                               <SearchModalResult key={movie.id} movie={movie} />
                             ))}
                           </div>
                         </div>
                       )}
-                      {activeOption && <SearchModalResultPreview activeOption={activeOption} />}
+                      {activeOption && (
+                      <SearchModalResultPreview
+                        activeOption={activeOption}
+                        onMoreDetailsClick={onMoreDetailsClick}
+                      />
+                      )}
                       {hasNoSearchResults && <SearchModalNoResultsMessage />}
                     </Combobox.Options>
                   </>

@@ -16,10 +16,9 @@ export default function SearchButton({ onClick }: Props) {
         text-slate-500 dark:text-slate-200 text-sm group`}
     >
       <MagnifyingGlassIcon
-        className={`w-4 h-4 mr-2 flex-none text-slate-300 dark:text-slate-400
-          group-hover:text-nordiska-hard-blue`}
+        className="w-4 h-4 mr-2 flex-none text-slate-300 dark:text-slate-400"
       />
-      <span className="text-left flex-auto group-hover:text-nordiska-hard-blue">Search...</span>
+      <span className="text-left flex-auto">Search...</span>
       <kbd className="font-medium flex flex-row gap-px leading-5">
         {isMacOS && <abbr title="Command" className="no-underline text-lg leading-5">⌘</abbr>}
         {!isMacOS && <abbr title="Control" className="no-underline text-xs pr-px leading-5">Ctrl</abbr>}
